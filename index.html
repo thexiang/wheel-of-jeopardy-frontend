@@ -46,29 +46,43 @@
 
 
 
-	<div class="grid-container">
-        <div class="grid-item">
+
+<div class="container-fluid">
+  <div id="score-board">
+	<div class="row">
+    <div class="col-sm-6" id="round-num"><b>Round#: 1</b></div>
+    <div class="col-sm-6" id="spin-num"><b>Spin#: 0</b></div>
+  </div>
+
+  <div class="row" id="score-bar">
+    <div class="col-sm-3" id="p1r1">Player1 Round1 Score: 0</div>
+    <div class="col-sm-3" id="p2r1">Player2 Round1 Score: 0</div>
+    <div class="col-sm-3" id="p1r2">Player1 Round2 Score: 0</div>
+    <div class="col-sm-3" id="p2r2">Player2 Round2 Score: 0</div>
+  </div>
+</div>
+
+	<div class="row">
+
+        <div class="col-sm-6">
             <table cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td>
                       <img id="spin_button" src="img/spin_on.png" alt="Spin" onClick="startSpin();" />
                       <br /><br />
                 </td>
-                <td width="438" height="582" class="the_wheel" align="center" valign="center" style="background-image: url('img/wheel_back1.png'); padding-bottom: 10px;">
+                <td width="380" height="485" class="the_wheel" align="center" valign="center" style="background-image: url('img/wheel_back1.png'); padding-bottom: 15px;">
                     <canvas id="canvas" width="434" height="434">
                         <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try Chrome.</p>
                     </canvas>
                 </td>
             </tr>
-        </table>
-		</div>
+          </table>
+		    </div>
 
 
-
-
-<div class="grid-item">
-    <div id='player-turn'> Player Turn </div>
-
+  <div class="col-sm-4">
+          <div id="player-turn">Player 1 turn</div>
           <table class="table table-bordered" id='jeopardy' >
           	<tbody>
           		<tr>
@@ -121,49 +135,46 @@
           		</tr>
           	</tbody>
           </table>
+
+
+              <div class="jumbotron">
+                <h3 id = 'question-display'>Spin Result / Question:</h3>
+                <h3 id = 'answer-display'></h3>
+
+          	    <button type="button" class="btn btn-success" id='show-answer'>Show Answer</button>
+                <button type="button" class="btn btn-success" id='right-button'>Right</button>
+                <button type="button" class="btn btn-danger" id='wrong-button'>Wrong</button>
+              </div>
+
         </div>
 
 
 
-  <div class="grid-item">
-    <div class="well well-sm">
-      <div id="round-num">Round#: 1</div>
-      <div id="spin-num">Spin#: 0</div>
-
-      <div id="p1r1">Player1 Round1 Score: 0</div>
-      <div id="p2r1">Player2 Round1 Score: 0</div>
-      <div id="p1r2">Player1 Round2 Score: 0</div>
-      <div id="p2r2">Player2 Round2 Score: 0</div>
-    </div>
-  </div>
-
-
-
-<div class="grid-item">
-
-    <div class="jumbotron">
-      <h3 id = 'question-display'>Spin Result / Question:</h3>
-      <h3 id = 'answer-display'></h3>
-
-	    <button type="button" class="btn btn-success" id='show-answer'>Show Answer</button>
-    </div>
-  <button type="button" class="btn btn-success" id='right-button'>Right</button>
-  <button type="button" class="btn btn-danger" id='wrong-button'>Wrong</button>
-
 </div>
-
-
-
 </div>
 </body>
 
 
 
-	   <script>
-
+	<script>
+      $('#right-button').hide()
+      $('#wrong-button').hide()
+      $('#show-answer').hide()
     const qCategories = ["Q1","Q2","Q3","Q4","Q5","Q6"]
     let qCategory
     let spins = 0
+    let isSpined = true
+    let isSelected = true
+    let playerTurn = 1
+
+    let qid
+
+    let p1r1 = 0
+    let p2r1 = 0
+    let p1r2 = 0
+    let p2r2 = 0
+    let tmpScore = 0
+    let tmpAnswer
 
 		let wheelitems = [
                    {'fillStyle' : '#ee1c24', 'text' : 'Q1'},
@@ -190,7 +201,7 @@
                 'textAlignment'   : 'outer',    // Align text to outside of wheel.
                 'numSegments'     : 12,         // Specify number of segments.
                 'segments'        :             // Define segments including colour and text.
-                wheelitems,
+                 wheelitems,
                 'animation' :           // Specify the animation to use.
                 {
                     'type'     : 'spinToStop',
@@ -219,7 +230,7 @@
                 audio.currentTime = 0;
 
                 // Play the sound.
-                audio.play();
+              //  audio.play();
             }
 
             // -------------------------------------------------------
@@ -227,15 +238,19 @@
             // -------------------------------------------------------
             function startSpin()
             {
+                   if(isSpined){
+
+                   console.log(isSpined)
                    theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                    theWheel.animation.spins = 10;
-                   resetColorColumn(qCategory)
+                   colorColumn(qCategory,"#000")
                    qCategory = ''
 
                    spins = spins + 1
-                   $('#spin-num').html("spins #: " + spins)
+                   $('#spin-num').html("<b>Spins #: " + spins + "</b>")
                  // Begin the spin animation by calling startAnimation on the wheel object.
                     theWheel.startAnimation();
+                  }
             }
 
             // -------------------------------------------------------
@@ -246,59 +261,83 @@
 
                if(qCategories.includes(indicatedSegment.text)){
 
-                 colorColumn(indicatedSegment.text)
+                colorColumn(indicatedSegment.text, "#F00")
                 qCategory = indicatedSegment.text
+                isSelected = true
+                isSpined = false
                 console.log(qCategory)
                }
                 else if (indicatedSegment.text == 'BANKRUPT') {
-                    alert('Oh no, you have gone BANKRUPT!');
+                    bankrupt()
+                }
+                else if (indicatedSegment.text == 'DOUBLE YOUR SCORE') {
+                    doubleScore()
+                }
+                else if (indicatedSegment.text == 'LOSE TURN') {
+                    loseTurn()
                 } else {
                     alert("You have won " + indicatedSegment.text);
                 }
             }
 
+            function doubleScore(){
+              console.log(playerTurn)
+              if(playerTurn == 1){
+                  playerTurn = 2
+                  p1r1 = p1r1 *  2
+                  displayPlayerScore(1,1)
+                  $('#player-turn').html("Player " + playerTurn)
+                  $('#answer-display').html("Player " + playerTurn + "'s turn")
+                  }
+              else{
+                  playerTurn = 1
+                  p2r1 = p2r1 * 2
+                  displayPlayerScore(2,1)
+                  $('#player-turn').html("Player " + playerTurn)
+                  $('#answer-display').html("Player " + playerTurn + "'s turn")
+                  }
+            }
 
-            function colorColumn(col){
+            function colorColumn(col, color){
                 columnTh = $("table th:contains('" + col  +"')"); // Find the heading with the text
                 columnIndex = columnTh.index() + 1; // Get the index & increment by 1 to match nth-child indexing
-                $('table tr td:nth-child(' + columnIndex + ')').css("color", "#F00"); // Set all the elements with that index in a tr red
-                columnTh.css("color", "#F00"); // Set the heading red too!
+                $('table tr td:nth-child(' + columnIndex + ')').css("color", color); // Set all the elements with that index in a tr red
+                columnTh.css("color", color); // Set the heading red too!
             }
 
 
-            function resetColorColumn(col){
-              console.log()
-                columnTh = $("table th:contains('" + col  +"')"); // Find the heading with the text
-                columnIndex = columnTh.index() + 1; // Get the index & increment by 1 to match nth-child indexing
-                $('table tr td:nth-child(' + columnIndex + ')').css("color", "#000"); // Set all the elements with that index in a tr red
-                columnTh.css("color", "#000"); // Set the heading red too!
+
+
+            function bankrupt(){
+              p1r1 = 0
+              displayPlayerScore(1,1)
             }
-
-            let qid
-            let answer
-            let p1r1 = 0
-            let p2r1 = 0
-            let p1r2 = 0
-            let p2r2 = 0
-
 
             //choose question
             $('#jeopardy tr td').click(function(){
                 qid = $(this).attr('id');
+                console.log(qid)
                 let qCategoryCol = qid.substring(0,2)
                 let domid = '#'+qid
 
 
+
               // 1.each question can be only clicked once
               // 2.only allow to select one specific category from the wheel
-              if($(domid)[0].innerText != '' && qCategoryCol === qCategory ){
+              if($(domid)[0].innerText != '' && qCategoryCol === qCategory && isSelected){
+                isSelected = false
                 webData()
-                $('#right-button').click(score)
+                tmpScore = parseInt($(domid)[0].innerText,10)
+                console.log(tmpScore)
+
+                $(domid).html("") //after click on table cell, remove it
+                $('#show-answer').show()
+
               }
 
                 //get data
                 function webData(){
-                  var url = 'http://127.0.0.1:5000/'
+                  var url = 'http://127.0.0.1:8000/'
                   $.get(url,output)
                 }
 
@@ -306,31 +345,79 @@
                 function output(data){
                   $('#answer-display').html("")
                   $('#question-display').html(data.display[0][qid]["question"])
-                  answer = data.display[0][qid]["answer"]
-
+                  tmpAnswer = data.display[0][qid]["answer"]
                 }
-
-
-                //display score
-                function score(){
-                  if($(domid)[0].innerText != ''){
-                      p1r1 = p1r1 +  parseInt($(domid)[0].innerText,10)
-                    }
-
-                  $('#p1r1').html("Player1 Round1: " + p1r1)
-                  $(domid).html("")
-
-                }
-
             });
 
 
 
-                $('#show-answer').click(function(){
-                  $('#answer-display').html(answer)
+
+
+            //display score
+            function scoreplus(){
+              console.log(tmpScore)
+
+                  $('#right-button').hide()
+                  $('#wrong-button').hide()
+
+              isSpined = true
+
+              console.log(playerTurn)
+              if(playerTurn == 1){
+                  playerTurn = 2
+                  p1r1 = p1r1 +  tmpScore
+                  displayPlayerScore(1,1)
+                  }
+              else{
+                  playerTurn = 1
+                  p2r1 = p2r1 +  tmpScore
+                  displayPlayerScore(2,1)
+                  }
+
+
+              console.log(playerTurn)
+              $('#player-turn').html("Player " + playerTurn)
+              $('#answer-display').html("Player " + playerTurn + "'s turn")
+              $('#question-display').html("")
+            }
+
+            //display score
+            function scoreminus(){
+              console.log(tmpScore)
+                  p1r1 = p1r1 -  tmpScore
+                  $('#right-button').hide()
+                  $('#wrong-button').hide()
+                  displayPlayerScore(1,1)
+              isSpined = true
+            }
+
+            $('#right-button').click(scoreplus)
+            $('#wrong-button').click(scoreminus)
+
+            //after click show answer button, display answer
+            $('#show-answer').click(function(){
+                  $('#answer-display').html(tmpAnswer)
+                  $('#show-answer').hide()
+                  $('#right-button').show()
+                  $('#wrong-button').show()
                 })
 
 
+
+            function displayPlayerScore(playerNum, RoundNum){
+              if(playerNum==1 && RoundNum==1){
+              $('#p1r1').html("Player1 Round1 Score: " + p1r1)
+              }
+              else if(playerNum==2 && RoundNum==1){
+                $('#p2r1').html("Player2 Round1 Score: " + p2r1)
+              }
+              else if(playerNum==1 && RoundNum==2){
+                $('#p1r2').html("Player1 Round2 Score: " + p2r2)
+              }
+              else if(playerNum==2 && RoundNum==2){
+                $('#p2r2').html("Player2 Round2 Score: " + p2r2)
+              }
+            }
 
 
 

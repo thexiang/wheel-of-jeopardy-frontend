@@ -1,11 +1,11 @@
 /*
 Description:
     Contains all the styles for the winning wheel page.
-    
+
 Verison History:
     2012-01-28, Douglas McKechie
     - Created based off earlier version.
-    
+
     2015-09-26, Douglas McKechie
     - Minor updates for the 2.0 winwheel example.
 */
@@ -82,16 +82,10 @@ td.pw3
 
 
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 600px  1fr;
-  padding: 10px;
+#score-bar {
+  margin-bottom: 20px;
 }
 
-.grid-item {
-
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
+#score-board {
+  background-color: #EEEEEE;
 }
