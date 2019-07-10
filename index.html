@@ -181,7 +181,7 @@
     const qCategories = ["C1","C2","C3","C4","C5","C6"]
     let qCategory
     let spins = 0
-    let isSpined = true
+    let isSpined = false
     let isSelected = false
     let playerTurn = 1
 
@@ -259,8 +259,8 @@
             // -------------------------------------------------------
             function startSpin()
             {
-                   if(isSpined){
-                   isSpined = false
+                   if(!isSpined){
+                   isSpined = true
                    theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                    theWheel.animation.spins = 10;
                    colorColumn(qCategory,"#000")
@@ -283,7 +283,7 @@
                 colorColumn(indicatedSegment.text, "#F00")
                 qCategory = indicatedSegment.text
                 isSelected = false
-                isSpined = false
+                isSpined = true
                 $('#answer-display').html("choose a question from " + indicatedSegment.text)
                }
                 else if (indicatedSegment.text == 'BANKRUPT') {
@@ -319,7 +319,6 @@
             function playerChoise(){
               $("#choose-category").show()
             }
-
 
             function opponentChoise(){
                 $("#choose-category").show()
@@ -396,56 +395,13 @@
                   $('#question-display').html("Player " + playerTurn + "'s turn")
                   $('#answer-display').html("Spin Wheel")
                   }
-                    isSpined = true
+                    isSpined = false
             }
-            $('#jeopardy tr th').click(function(){
-                qid = $(this).attr('id');
-                console.log(qid)
-
-                let domid = '#'+qid
-              })
-            //choose question
-            $('#jeopardy tr td').click(function(){
-                qid = $(this).attr('id');
-                console.log(qid)
-                let qCategoryCol = qid.substring(0,2)
-                let domid = '#'+qid
-
-
-                console.log(qCategoryCol)
-                console.log(qCategory)
-              // 1.each question can be only clicked once
-              // 2.only allow to select one specific category from the wheel
-              if($(domid)[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
-                isSelected = true
-                webData()
-                tmpScore = parseInt($(domid)[0].innerText,10)
-                console.log(tmpScore)
-
-                $(domid).html("") //after click on table cell, remove it
-                $('#show-answer').show()
-
-              }
-
-                //get data
-                function webData(){
-                  var url = 'https://jhu-se-api.azurewebsites.net/get_qas'
-                  $.get(url,output)
-                }
-
-                //display result
-                function output(data){
-                  $('#answer-display').html("")
-                  $('#question-display').html(data.display[0][qid]["question"])
-                  tmpAnswer = data.display[0][qid]["answer"]
-                }
-            });
 
 
 
 
-
-            //display score
+            //correct answer
             function scoreplus(){
               $('#right-button').hide()
               $('#wrong-button').hide()
@@ -454,7 +410,7 @@
               $('#answer-display').html('')
             }
 
-            //display score
+            //wrong answer
             function scoreminus(){
              $('#right-button').hide()
              $('#wrong-button').hide()
@@ -463,19 +419,8 @@
               $('#answer-display').html('')
             }
 
-            $('#right-button').click(scoreplus)
-            $('#wrong-button').click(scoreminus)
 
-            //after click show answer button, display answer
-            $('#show-answer').click(function(){
-                  $('#answer-display').html(tmpAnswer)
-                  $('#show-answer').hide()
-                  $('#right-button').show()
-                  $('#wrong-button').show()
-                })
-
-
-
+            //display player scores
             function displayPlayerScore(playerNum, RoundNum){
               if(playerNum==1 && RoundNum==1){
               $('#p1r1').html("Player1 Round1 Score: " + p1r1)
@@ -491,6 +436,44 @@
               }
             }
 
+
+
+//***********Click Events*******************//
+
+//choose question
+$('#jeopardy tr td').click(function(){
+    qid = $(this).attr('id');
+    let qCategoryCol = qid.substring(0,2)
+    let domid = '#'+qid
+
+  // 1.each question can be only clicked once
+  // 2.only allow to select one specific category from the wheel
+  if($(domid)[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
+    isSelected = true
+    webData()
+    tmpScore = parseInt($(domid)[0].innerText,10)
+
+    $(domid).html("") //after click on table cell, remove it
+    $('#show-answer').show()
+
+  }
+
+    //get data
+    function webData(){
+      var url = 'https://jhu-se-api.azurewebsites.net/get_qas'
+      $.get(url,output)
+    }
+
+    //display result
+    function output(data){
+      $('#answer-display').html("")
+      $('#question-display').html(data.display[0][qid]["question"])
+      tmpAnswer = data.display[0][qid]["answer"]
+    }
+});
+
+
+            //player choise or opponent choise
             $( "#choose-category input" ).on('change', function() {
                a = $('input[name=optradio]:checked', '#choose-category').val()
                colorColumn(a, "#F00")
@@ -499,6 +482,19 @@
                $(this).prop('checked', false);
                $("#choose-category").hide()
             });
+
+            $('#right-button').click(scoreplus)
+            $('#wrong-button').click(scoreminus)
+
+            //after click show answer button, display answer
+            $('#show-answer').click(function(){
+                  $('#answer-display').html(tmpAnswer)
+                  $('#show-answer').hide()
+                  $('#right-button').show()
+                  $('#wrong-button').show()
+                })
+
+
 
 
         </script>
