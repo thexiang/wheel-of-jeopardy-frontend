@@ -73,7 +73,7 @@
                       <img id="spin_button" src="img/spin_on.png" alt="Spin" onClick="startSpin();" />
                       <br /><br />
                 </td>
-                <td width="380" height="485" class="the_wheel" align="center" valign="center" style="background-image: url('img/wheel_back1.png'); padding-bottom: 15px;">
+                <td width="380" height="485" class="the_wheel" align="center" valign="center" style="background-image: url('img/wheel_back.png'); padding-bottom: 15px;">
                     <canvas id="canvas" width="434" height="434">
                         <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try Chrome.</p>
                     </canvas>
@@ -168,12 +168,25 @@
 
 
 
-	<script>
-    let a
+<script>
+let qadata
+  //get data
+  function webData(){
+    var url = 'https://jhu-se-api.azurewebsites.net/get_qas'
+    $.get(url,output)
+  }
+
+  //display result
+  function output(data){
+    qadata = data
+  }
+
+webData()
+
+
+    let categoryChoice
     //$("#game-board").hide()
     $("#choose-category").hide()
-
-
 
       $('#right-button').hide()
       $('#wrong-button').hide()
@@ -228,7 +241,7 @@
                     'type'     : 'spinToStop',
                     'duration' : 5,    // Duration in seconds.
                     'spins'    : 3,     // Default number of complete spins.
-                    'callbackFinished' : alertPrize,
+                    'callbackFinished' : handleWheel,
                     'callbackSound'    : playSound,   // Function to call when the tick sound is to be triggered.
                     'soundTrigger'     : 'pin'        // Specify pins are to trigger the sound, the other option is 'segment'.
                 },
@@ -261,6 +274,7 @@
             {
                    if(!isSpined){
                    isSpined = true
+                   $("#spin_button").attr("src","img/spin_off.png");
                    theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                    theWheel.animation.spins = 10;
                    colorColumn(qCategory,"#000")
@@ -276,14 +290,14 @@
             // -------------------------------------------------------
             // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
             // -------------------------------------------------------
-            function alertPrize(indicatedSegment)
+            function handleWheel(indicatedSegment)
             {
               //if it's one of Categories
                if(qCategories.includes(indicatedSegment.text)){
                 colorColumn(indicatedSegment.text, "#F00")
                 qCategory = indicatedSegment.text
                 isSelected = false
-                isSpined = true
+
                 $('#answer-display').html("choose a question from " + indicatedSegment.text)
                }
                 else if (indicatedSegment.text == 'BANKRUPT') {
@@ -395,29 +409,23 @@
                   $('#question-display').html("Player " + playerTurn + "'s turn")
                   $('#answer-display').html("Spin Wheel")
                   }
-                    isSpined = false
+                  isSpined = false
+                  $("#spin_button").attr("src","img/spin_on.png");
             }
 
 
 
 
             //correct answer
-            function scoreplus(){
+            function handleRightWrong(op){
               $('#right-button').hide()
               $('#wrong-button').hide()
 
-              swithPlayerTurn('+')
+              colorColumn(qCategory,"#000")
+              swithPlayerTurn(op)
               $('#answer-display').html('')
             }
 
-            //wrong answer
-            function scoreminus(){
-             $('#right-button').hide()
-             $('#wrong-button').hide()
-
-              swithPlayerTurn('-')
-              $('#answer-display').html('')
-            }
 
 
             //display player scores
@@ -450,7 +458,10 @@ $('#jeopardy tr td').click(function(){
   // 2.only allow to select one specific category from the wheel
   if($(domid)[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
     isSelected = true
-    webData()
+
+    $('#answer-display').html("")
+    $('#question-display').html(qadata.display[0][qid]["question"])
+    tmpAnswer = qadata.display[0][qid]["answer"]
     tmpScore = parseInt($(domid)[0].innerText,10)
 
     $(domid).html("") //after click on table cell, remove it
@@ -458,33 +469,23 @@ $('#jeopardy tr td').click(function(){
 
   }
 
-    //get data
-    function webData(){
-      var url = 'https://jhu-se-api.azurewebsites.net/get_qas'
-      $.get(url,output)
-    }
 
-    //display result
-    function output(data){
-      $('#answer-display').html("")
-      $('#question-display').html(data.display[0][qid]["question"])
-      tmpAnswer = data.display[0][qid]["answer"]
-    }
 });
+
 
 
             //player choise or opponent choise
             $( "#choose-category input" ).on('change', function() {
-               a = $('input[name=optradio]:checked', '#choose-category').val()
-               colorColumn(a, "#F00")
-               qCategory = a
+               categoryChoice = $('input[name=optradio]:checked', '#choose-category').val()
+               colorColumn(categoryChoice, "#F00")
+               qCategory = categoryChoice
                isSelected = false
                $(this).prop('checked', false);
                $("#choose-category").hide()
             });
 
-            $('#right-button').click(scoreplus)
-            $('#wrong-button').click(scoreminus)
+            $('#right-button').click(function(){handleRightWrong('+')})
+            $('#wrong-button').click(function(){handleRightWrong('-')})
 
             //after click show answer button, display answer
             $('#show-answer').click(function(){
