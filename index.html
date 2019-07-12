@@ -207,15 +207,36 @@ webData()
 
     let qid
 
-    let p1r1 = 0
-    let p2r1 = 0
-    let p1r2 = 0
-    let p2r2 = 0
+
+
+    let playerInfo ={
+          round1:{
+            player1: {
+              score: 0,
+              token: 0
+            },
+            player2:{
+              score: 0,
+              token: 0
+              }
+            }
+       ,
+          round2:{
+            player1: {
+              score: 0,
+              token: 0
+            },
+            player2:{
+              score: 0,
+              token: 0
+              }
+            }
+    }
+
     let tmpScore = 0
     let tmpAnswer
 
-    let p1Token = 1
-    let p2Token = 1
+
 
 		let wheelitems = [
                    {'fillStyle' : '#ee1c24', 'text' : 'C1'},
@@ -352,8 +373,8 @@ webData()
             }
 
             function loseTurn(){
-              if(p1Token!=0){
-                  $('#answer-display').html("Use Token for another Spin? you have " + p1Token + " remaining")
+              if(playerInfo["round1"]["player1"].token!=0){
+                  display('#answer-display',"Use Token for another Spin? you have " + playerInfo["round1"]["player1"].token + " remaining")
                   $('#use-token').show()
                   $('#not-use-token').show()
                 }
@@ -370,65 +391,38 @@ webData()
 
             function swithPlayerTurn(operation){
               if(playerTurn == 1){
+                opponentid = 2
+               }
+               else if (playerTurn == 2) {
+                 opponentid = 1
+               }
                   switch(operation){
                   case '*':
-                    p1r1 = p1r1 *  2
+                    playerInfo["round1"]["player" + playerTurn].score *=  2
                     break
                   case '+':
-                    p1r1 = p1r1 + tmpScore
+                    playerInfo["round1"]["player" + playerTurn].score += tmpScore
                     break
                   case '-':
-                    p1r1 = p1r1 - tmpScore
+                    playerInfo["round1"]["player" + playerTurn].score -= tmpScore
                     break
                   case 'zero':
-                    p1r1 = 0
+                    playerInfo["round1"]["player" + playerTurn].score = 0
                     break
                   case 'lose':
                     break
                   case 'free':
-                    p1Token = p1Token + 1
-                    display('#player1-token',"Player1 Token# " + p1Token)
+                    playerInfo["round1"]["player" + playerTurn].token += 1
+                    display("#player"+ playerTurn + "-token", "Player" + playerTurn + "Token# " + playerInfo["round1"]["player" + playerTurn].token)
                     break
                 }
                   displayPlayerScore(playerTurn,1)
-                  playerTurn = 2
+                  playerTurn = opponentid
                   display('#player-turn',"Player " + playerTurn)
                   display('#question-display',"Player " + playerTurn + "'s turn")
                   display('#answer-display',"Spin Wheel")
-                  }
-              else{
-                switch(operation){
-                  case '*':
-                    p2r1 = p2r1 *  2
-                    break
-                  case '+':
-                    p2r1 = p2r1 + tmpScore
-                    break
-                  case '-':
-                    p2r1 = p2r1 - tmpScore
-                    break
-                  case 'zero':
-                    p2r1 = 0
-                    break
-                  case 'lose':
-                  if(p2Token!=0){
-                      display('#player2-token',"Player2 Token# " + p2Token)
-                      $('#use-token').show()
-                      $('#not-use-token').show()
-                    }
-                    break
-                  case 'free':
-                    p2Token = p2Token + 1
-                    display('#player2-token',"<b>Player2 Token# " + p2Token + "</b>")
-                    break
-                }
-                  displayPlayerScore(playerTurn,1)
-                  playerTurn = 1
 
-                  display('#player-turn',"Player " + playerTurn)
-                  display('#question-display',"Player " + playerTurn + "'s turn")
-                  display('#answer-display',"Spin Wheel")
-                  }
+
                   isSpined = false
                   $("#spin_button").attr("src","img/spin_on.png");
             }
@@ -452,21 +446,21 @@ webData()
             //display player scores
             function displayPlayerScore(playerNum, RoundNum){
               if(playerNum==1 && RoundNum==1){
-                  display('#p1r1',"Player1 Round1 Score: " + p1r1)
+                  display('#p1r1',"Player1 Round1 Score: " + playerInfo["round1"]["player1"].score)
               }
               else if(playerNum==2 && RoundNum==1){
-                 display('#p2r1',"Player2 Round1 Score: " + p2r1)
+                 display('#p2r1',"Player2 Round1 Score: " + playerInfo["round1"]["player2"].score)
               }
               else if(playerNum==1 && RoundNum==2){
-                $('#p1r2').html("Player1 Round2 Score: " + p2r2)
+                $('#p1r2').html("Player1 Round2 Score: " + playerInfo["round2"]["player1"].score)
               }
               else if(playerNum==2 && RoundNum==2){
-                $('#p2r2').html("Player2 Round2 Score: " + p2r2)
+                $('#p2r2').html("Player2 Round2 Score: " + playerInfo["round2"]["player2"].score)
               }
             }
 
             function display(id, text){
-              $(id).fadeOut(500, function() { $(id).text(text).fadeIn(500);})
+              $(id).fadeOut(300, function() { $(id).text(text).fadeIn(300);})
             }
 
 
