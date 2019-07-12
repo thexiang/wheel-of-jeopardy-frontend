@@ -89,3 +89,7 @@ td.pw3
 #score-board {
   background-color: #EEEEEE;
 }
+
+#player1-token, #player2-token{
+  font-weight: bold;
+}

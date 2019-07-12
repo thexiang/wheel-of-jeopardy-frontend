@@ -30,6 +30,7 @@
     </head>
 <body>
 
+
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -52,8 +53,8 @@
 	<div class="row">
     <div class="col-sm-3" id="round-num"><b>Round#: 1</b></div>
     <div class="col-sm-3" id="spin-num"><b>Spin#: 0</b></div>
-    <div class="col-sm-3" id="player1-token"><b>Player2 Token#: 0</b></div>
-    <div class="col-sm-3" id="player2-token"><b>Player2 Token#: 0</b></div>
+    <div class="col-sm-3" id="player1-token">Player1 Token#: 0</div>
+    <div class="col-sm-3" id="player2-token">Player2 Token#: 0</div>
   </div>
 
   <div class="row" id="score-bar">
@@ -148,12 +149,14 @@
                   <label class="radio"><input type="radio" name="optradio" value="C5">C5</label>
                   <label class="radio"><input type="radio" name="optradio" value="C6">C6</label>
               </form>
-                <h3 id = 'question-display'>Player1's turn</h3>
-                <h3 id = 'answer-display'></h3>
+                <h4 id = 'question-display'>Player1's turn</h4>
+                <h4 id = 'answer-display'></h4>
 
           	    <button type="button" class="btn btn-success" id='show-answer'>Show Answer</button>
                 <button type="button" class="btn btn-success" id='right-button'>Right</button>
                 <button type="button" class="btn btn-danger" id='wrong-button'>Wrong</button>
+                <button type="button" class="btn btn-success" id='use-token'>Yes</button>
+                <button type="button" class="btn btn-danger" id='not-use-token'>No</button>
               </div>
 
         </div>
@@ -162,6 +165,7 @@
 
 </div>
 </div>
+
 
 
 </body>
@@ -191,6 +195,9 @@ webData()
       $('#right-button').hide()
       $('#wrong-button').hide()
       $('#show-answer').hide()
+      $('#use-token').hide()
+      $('#not-use-token').hide()
+
     const qCategories = ["C1","C2","C3","C4","C5","C6"]
     let qCategory
     let spins = 0
@@ -207,8 +214,8 @@ webData()
     let tmpScore = 0
     let tmpAnswer
 
-    let p1Token = 0
-    let p2Token = 0
+    let p1Token = 1
+    let p2Token = 1
 
 		let wheelitems = [
                    {'fillStyle' : '#ee1c24', 'text' : 'C1'},
@@ -297,8 +304,8 @@ webData()
                 colorColumn(indicatedSegment.text, "#F00")
                 qCategory = indicatedSegment.text
                 isSelected = false
+                display('#answer-display',"choose a question from " + indicatedSegment.text)
 
-                $('#answer-display').html("choose a question from " + indicatedSegment.text)
                }
                 else if (indicatedSegment.text == 'BANKRUPT') {
                     bankrupt()
@@ -331,10 +338,12 @@ webData()
             }
 
             function playerChoise(){
+              $('#answer-display').html("Choose a category for yourself")
               $("#choose-category").show()
             }
 
             function opponentChoise(){
+                $('#answer-display').html("Please let your opponent choose a category for you")
                 $("#choose-category").show()
             }
 
@@ -343,7 +352,12 @@ webData()
             }
 
             function loseTurn(){
-              swithPlayerTurn('lose')
+              if(p1Token!=0){
+                  $('#answer-display').html("Use Token for another Spin? you have " + p1Token + " remaining")
+                  $('#use-token').show()
+                  $('#not-use-token').show()
+                }
+              else{swithPlayerTurn('lose')}
             }
 
             function doubleScore(){
@@ -373,14 +387,14 @@ webData()
                     break
                   case 'free':
                     p1Token = p1Token + 1
-                    $('#player1-token').html("<b>Player1 Token# " + p1Token + "</b>")
+                    display('#player1-token',"Player1 Token# " + p1Token)
                     break
                 }
                   displayPlayerScore(playerTurn,1)
                   playerTurn = 2
-                  $('#player-turn').html("Player " + playerTurn)
-                  $('#question-display').html("Player " + playerTurn + "'s turn")
-                  $('#answer-display').html("Spin Wheel")
+                  display('#player-turn',"Player " + playerTurn)
+                  display('#question-display',"Player " + playerTurn + "'s turn")
+                  display('#answer-display',"Spin Wheel")
                   }
               else{
                 switch(operation){
@@ -397,17 +411,23 @@ webData()
                     p2r1 = 0
                     break
                   case 'lose':
+                  if(p2Token!=0){
+                      display('#player2-token',"Player2 Token# " + p2Token)
+                      $('#use-token').show()
+                      $('#not-use-token').show()
+                    }
                     break
                   case 'free':
                     p2Token = p2Token + 1
-                    $('#player2-token').html("<b>Player2 Token# " + p2Token + "</b>")
+                    display('#player2-token',"<b>Player2 Token# " + p2Token + "</b>")
                     break
                 }
                   displayPlayerScore(playerTurn,1)
                   playerTurn = 1
-                  $('#player-turn').html("Player " + playerTurn)
-                  $('#question-display').html("Player " + playerTurn + "'s turn")
-                  $('#answer-display').html("Spin Wheel")
+
+                  display('#player-turn',"Player " + playerTurn)
+                  display('#question-display',"Player " + playerTurn + "'s turn")
+                  display('#answer-display',"Spin Wheel")
                   }
                   isSpined = false
                   $("#spin_button").attr("src","img/spin_on.png");
@@ -423,7 +443,8 @@ webData()
 
               colorColumn(qCategory,"#000")
               swithPlayerTurn(op)
-              $('#answer-display').html('')
+
+              display('#answer-display',"Spin Wheel")
             }
 
 
@@ -431,10 +452,10 @@ webData()
             //display player scores
             function displayPlayerScore(playerNum, RoundNum){
               if(playerNum==1 && RoundNum==1){
-              $('#p1r1').html("Player1 Round1 Score: " + p1r1)
+                  display('#p1r1',"Player1 Round1 Score: " + p1r1)
               }
               else if(playerNum==2 && RoundNum==1){
-                $('#p2r1').html("Player2 Round1 Score: " + p2r1)
+                 display('#p2r1',"Player2 Round1 Score: " + p2r1)
               }
               else if(playerNum==1 && RoundNum==2){
                 $('#p1r2').html("Player1 Round2 Score: " + p2r2)
@@ -442,6 +463,10 @@ webData()
               else if(playerNum==2 && RoundNum==2){
                 $('#p2r2').html("Player2 Round2 Score: " + p2r2)
               }
+            }
+
+            function display(id, text){
+              $(id).fadeOut(500, function() { $(id).text(text).fadeIn(500);})
             }
 
 
