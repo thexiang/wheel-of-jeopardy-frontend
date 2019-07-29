@@ -25,7 +25,8 @@
         <script type="text/javascript" src='js/Winwheel.js'></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     </head>
 <body>
@@ -46,6 +47,7 @@
   </nav>
 
 
+  <button type="button" class="btn btn-success" id='start-game'>Strat Game</button>
 
 
 <div class="container-fluid" id="game-board">
@@ -71,7 +73,7 @@
             <table cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td>
-                      <img id="spin_button" src="img/spin_on.png" alt="Spin" onClick="startSpin();" />
+                      <img id="spin_button" src="img/spin_off.png" alt="Spin" onClick="startSpin();" />
                       <br /><br />
                 </td>
                 <td width="380" height="485" class="the_wheel" align="center" valign="center" style="background-image: url('img/wheel_back.png'); padding-bottom: 15px;">
@@ -89,52 +91,52 @@
           <table class="table table-bordered" id='jeopardy' >
           	<tbody>
           		<tr>
-          			<th id='C1'> C1</th>
-          			<th id='C2'> C2</th>
-          			<th id='C3'> C3</th>
-          			<th id='C4'> C4</th>
-          			<th id='C5'> C5</th>
-          			<th id='C6'> C6</th>
+          			<th id='Geography'> Geography</th>
+          			<th id='new History'> new History</th>
+          			<th id='Religion'> Religion</th>
+          			<th id='Solar System'> Solar System</th>
+          			<th id='Sports and Entertainment'> Sports and Entertainment</th>
+          			<th id='Science'> Science</th>
           		</tr>
           		<tr>
-          			<td id='C1-200'> 200</td>
-          			<td id='C2-200'> 200</td>
-          			<td id='C3-200'> 200</td>
-          			<td id='C4-200'> 200</td>
-          			<td id='C5-200'> 200</td>
-          			<td id='C6-200'> 200</td>
+          			<td id='Geography-200'> 200</td>
+          			<td id='new History-200'> 200</td>
+          			<td id='Religion-200'> 200</td>
+          			<td id='Solar System-200'> 200</td>
+          			<td id='Sports and Entertainment-200'> 200</td>
+          			<td id='Science-200'> 200</td>
           		</tr>
           		<tr>
-          			<td id='C1-400'> 400</td>
-          			<td id='C2-400'> 400</td>
-          			<td id='C3-400'> 400</td>
-          			<td id='C4-400'> 400</td>
-          			<td id='C5-400'> 400</td>
-          			<td id='C6-400'> 400</td>
+          			<td id='Geography-400'> 400</td>
+          			<td id='new History-400'> 400</td>
+          			<td id='Religion-400'> 400</td>
+          			<td id='Solar System-400'> 400</td>
+          			<td id='Sports and Entertainment-400'> 400</td>
+          			<td id='Science-400'> 400</td>
           		</tr>
           		<tr>
-          			<td id='C1-600'> 600</td>
-          			<td id='C2-600'> 600</td>
-          			<td id='C3-600'> 600</td>
-          			<td id='C4-600'> 600</td>
-          			<td id='C5-600'> 600</td>
-          			<td id='C6-600'> 600</td>
+          			<td id='Geography-600'> 600</td>
+          			<td id='new History-600'> 600</td>
+          			<td id='Religion-600'> 600</td>
+          			<td id='Solar System-600'> 600</td>
+          			<td id='Sports and Entertainment-600'> 600</td>
+          			<td id='Science-600'> 600</td>
           		</tr>
           		<tr>
-          			<td id='C1-800'> 800</td>
-          			<td id='C2-800'> 800</td>
-          			<td id='C3-800'> 800</td>
-          			<td id='C4-800'> 800</td>
-          			<td id='C5-800'> 800</td>
-          			<td id='C6-800'> 800</td>
+          			<td id='Geography-800'> 800</td>
+          			<td id='new History-800'> 800</td>
+          			<td id='Religion-800'> 800</td>
+          			<td id='Solar System-800'> 800</td>
+          			<td id='Sports and Entertainment-800'> 800</td>
+          			<td id='Science-800'> 800</td>
           		</tr>
           		<tr>
-          			<td id='C1-1000'> 1000</td>
-          			<td id='C2-1000'> 1000</td>
-          			<td id='C3-1000'> 1000</td>
-          			<td id='C4-1000'> 1000</td>
-          			<td id='C5-1000'> 1000</td>
-          			<td id='C6-1000'> 1000</td>
+          			<td id='Geography-1000'> 1000</td>
+          			<td id='new History-1000'> 1000</td>
+          			<td id='Religion-1000'> 1000</td>
+          			<td id='Solar System-1000'> 1000</td>
+          			<td id='Sports and Entertainment-1000'> 1000</td>
+          			<td id='Science-1000'> 1000</td>
           		</tr>
           	</tbody>
           </table>
@@ -142,12 +144,12 @@
 
               <div class="jumbotron">
                 <form id = "choose-category">
-                  <label class="radio"><input type="radio" name="optradio" value="C1">C1</label>
-                  <label class="radio"><input type="radio" name="optradio" value="C2">C2</label>
-                  <label class="radio"><input type="radio" name="optradio" value="C3">C3</label>
-                  <label class="radio"><input type="radio" name="optradio" value="C4">C4</label>
-                  <label class="radio"><input type="radio" name="optradio" value="C5">C5</label>
-                  <label class="radio"><input type="radio" name="optradio" value="C6">C6</label>
+                  <label class="radio"><input type="radio" name="optradio" value="Geography">Geography</label>
+                  <label class="radio"><input type="radio" name="optradio" value="new History">new History</label>
+                  <label class="radio"><input type="radio" name="optradio" value="Religion">Religion</label>
+                  <label class="radio"><input type="radio" name="optradio" value="Solar System">Solar System</label>
+                  <label class="radio"><input type="radio" name="optradio" value="Sports and Entertainment">Sports and Entertainment</label>
+                  <label class="radio"><input type="radio" name="optradio" value="Science">Science</label>
               </form>
                 <h4 id = 'question-display'>Player1's turn</h4>
                 <h4 id = 'answer-display'></h4>
@@ -167,16 +169,16 @@
 </div>
 
 
-
 </body>
 
 
 
 <script>
-let qadata
+
+    let qadata
   //get data
   function webData(){
-    var url = 'https://jhu-se-api.azurewebsites.net/get_qas'
+    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas'
     $.get(url,output)
   }
 
@@ -185,23 +187,32 @@ let qadata
     qadata = data
   }
 
-webData()
+
+  $("#start-game").click(function(){
+    isSpined = false
+    $("#spin_button").attr("src","img/spin_on.png");
+    $("#start-game").hide()
+    $("#select-set").hide()
+    webData()
+    }
+  )
 
 
-    let categoryChoice
+
+      //$("#select-set").hide()
     //$("#game-board").hide()
-    $("#choose-category").hide()
-
+      $("#choose-category").hide()
       $('#right-button').hide()
       $('#wrong-button').hide()
       $('#show-answer').hide()
       $('#use-token').hide()
       $('#not-use-token').hide()
 
-    const qCategories = ["C1","C2","C3","C4","C5","C6"]
+    let categoryChoice
+    const qCategories = ['Geography','new History','Religion','Solar System','Sports and Entertainment','Science ']
     let qCategory
     let spins = 0
-    let isSpined = false
+    let isSpined = true
     let isSelected = false
     let playerTurn = 1
 
@@ -239,13 +250,13 @@ webData()
 
 
 		let wheelitems = [
-                   {'fillStyle' : '#ee1c24', 'text' : 'C1'},
-                   {'fillStyle' : '#3cb878', 'text' : 'C2'},
-                   {'fillStyle' : '#f6989d', 'text' : 'C3'},
-                   {'fillStyle' : '#00aef0', 'text' : 'C4'},
-                   {'fillStyle' : '#f26522', 'text' : 'C5'},
+                   {'fillStyle' : '#ee1c24', 'text' : 'Geography','textFontSize' : 12},
+                   {'fillStyle' : '#3cb878', 'text' : 'new History' ,'textFontSize' : 12},
+                   {'fillStyle' : '#f6989d', 'text' : 'Religion','textFontSize' : 12},
+                   {'fillStyle' : '#00aef0', 'text' : 'Solar System', 'textFontSize' : 10},
+                   {'fillStyle' : '#f26522', 'text' : 'Sports and Entertainment','textFontSize' : 8},
                    {'fillStyle' : '#000000', 'text' : 'DOUBLE YOUR SCORE', 'textFontSize' : 8 , 'textFillStyle' : '#ffffff'},
-                   {'fillStyle' : '#f26522', 'text' : 'C6'},
+                   {'fillStyle' : '#f26522', 'text' : 'Science','textFontSize' : 10},
                    {'fillStyle' : '#3cb878', 'text' : 'OPPONENT CHOISE' , 'textFontSize' : 9},
                    {'fillStyle' : '#000000', 'text' : 'BANKRUPT', 'textFontSize' : 16, 'textFillStyle' : '#ffffff'},
                    {'fillStyle' : '#fff200', 'text' : 'PLAYER CHOISE' , 'textFontSize' : 10},
@@ -373,12 +384,14 @@ webData()
             }
 
             function loseTurn(){
-              if(playerInfo["round1"]["player1"].token!=0){
-                  display('#answer-display',"Use Token for another Spin? you have " + playerInfo["round1"]["player1"].token + " remaining")
-                  $('#use-token').show()
-                  $('#not-use-token').show()
-                }
-              else{swithPlayerTurn('lose')}
+              // if(playerInfo["round1"]["player1"].token!=0){
+              //     display('#answer-display',"Use Token for another Spin? you have " + playerInfo["round1"]["player1"].token + " remaining")
+              //     $('#use-token').show()
+              //     $('#not-use-token').show()
+              //   }
+              // else{swithPlayerTurn('lose')}
+
+              swithPlayerTurn('lose')
             }
 
             function doubleScore(){
@@ -470,20 +483,19 @@ webData()
 //choose question
 $('#jeopardy tr td').click(function(){
     qid = $(this).attr('id');
-    let qCategoryCol = qid.substring(0,2)
-    let domid = '#'+qid
+    let qCategoryCol = qid.substring(0,qid.indexOf('-'))
 
   // 1.each question can be only clicked once
   // 2.only allow to select one specific category from the wheel
-  if($(domid)[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
+  if($(document.getElementById(qid))[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
     isSelected = true
 
     $('#answer-display').html("")
     $('#question-display').html(qadata.display[0][qid]["question"])
     tmpAnswer = qadata.display[0][qid]["answer"]
-    tmpScore = parseInt($(domid)[0].innerText,10)
+    tmpScore = parseInt($(document.getElementById(qid))[0].innerText,10)
 
-    $(domid).html("") //after click on table cell, remove it
+    $(document.getElementById(qid)).html("") //after click on table cell, remove it
     $('#show-answer').show()
 
   }
@@ -513,6 +525,12 @@ $('#jeopardy tr td').click(function(){
                   $('#right-button').show()
                   $('#wrong-button').show()
                 })
+
+
+                $(".dropdown-menu li a").click(function(){
+                  $(".dropdown-menu li a").parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                  $(".dropdown-menu li a").parents(".dropdown").find('.btn').val($(this).data('value'));
+                });
 
 
 
