@@ -55,11 +55,11 @@ let playerInfo ={
       round1:{
         player1: {
           score: 0,
-          token: 1
+          token: 0
         },
         player2:{
           score: 0,
-          token: 1
+          token: 0
           }
         }
    ,
