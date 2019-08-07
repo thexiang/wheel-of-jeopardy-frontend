@@ -1,7 +1,7 @@
 //init variable
 let qadata
 
-const qCategories = ['Geography','new History','Religion','Solar System','Sports and Entertainment','Science']
+const qCategories = ['Geography','History','Religion','Solar System','Sports and Entertainment','Science']
 
 const qCategories2 =
  {
@@ -12,7 +12,7 @@ const qCategories2 =
     fontSize: calSize()
   },
   C2: {
-    name: 'new History',
+    name: 'History',
     answeredCount: 0,
     ontSize: calSize()
   },
