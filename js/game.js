@@ -1,48 +1,73 @@
+const test = {
+  "Geography" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  }
+  ,
+  "History" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  },
+  "Religion" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  }
+  ,
+  "Solar System" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  },
+  "Sports and Entertainment" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  }
+  ,
+  "Science" : {
+    qa: {
+      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
+      600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
+      800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
+      1000: {question: "q5" , answer: "a5", points : 1000,answeredCount: 0}
+    }
+  }
+}
+
+
+
+
+
+
+
 //init variable
 let qadata
 
 const qCategories = ['Geography','History','Religion','Solar System','Sports and Entertainment','Science']
-
-const qCategories2 =
- {
-  round1:{
-  C1: {
-    name: 'Geography',
-    answeredCount: 0,
-    fontSize: calSize()
-  },
-  C2: {
-    name: 'History',
-    answeredCount: 0,
-    ontSize: calSize()
-  },
-  C3: {
-    name: 'Religion',
-    answeredCount: 0,
-    ontSize: calSize()
-  },
-  C4: {
-    name: 'Solar System',
-    answeredCount: 0,
-    ontSize: calSize()
-  },
-  C5: {
-    name: 'Sports and Entertainment',
-    answeredCount: 0,
-    ontSize: calSize()
-  },
-  C6: {
-    name: 'Science',
-    answeredCount: 0,
-    ontSize: calSize()
-  }
-}
-
-}
-
-function calSize(){
-  return 12
-}
 
 let qCategory
 let spins = 0
@@ -81,13 +106,13 @@ let tmpAnswer
 
 
 let wheelitems = [
-               {'fillStyle' : '#ee1c24', 'text' : qCategories2["round" + roundNum].C1.name,'textFontSize' : qCategories2["round" + roundNum].C1.fontSize},
-               {'fillStyle' : '#3cb878', 'text' : qCategories2["round" + roundNum].C2.name ,'textFontSize' : 12},
-               {'fillStyle' : '#f6989d', 'text' : qCategories2["round" + roundNum].C3.name ,'textFontSize' : 12},
-               {'fillStyle' : '#00aef0', 'text' : 'Solar System', 'textFontSize' : 10},
-               {'fillStyle' : '#f26522', 'text' : 'Sports and Entertainment','textFontSize' : 8},
+               {'fillStyle' : '#ee1c24', 'text' : qCategories[0], 'textFontSize' : calSize(qCategories[0])},
+               {'fillStyle' : '#3cb878', 'text' : qCategories[1] ,'textFontSize' : calSize(qCategories[1])},
+               {'fillStyle' : '#f6989d', 'text' : qCategories[2] ,'textFontSize' : calSize(qCategories[2])},
+               {'fillStyle' : '#00aef0', 'text' : qCategories[3] ,'textFontSize' : calSize(qCategories[3])},
+               {'fillStyle' : '#f26522', 'text' : qCategories[4] ,'textFontSize' : calSize(qCategories[4])},
                {'fillStyle' : '#000000', 'text' : 'DOUBLE YOUR SCORE', 'textFontSize' : 8 , 'textFillStyle' : '#ffffff'},
-               {'fillStyle' : '#f26522', 'text' : 'Science','textFontSize' : 10},
+               {'fillStyle' : '#f26522', 'text' : qCategories[5] ,'textFontSize' : calSize(qCategories[5])},
                {'fillStyle' : '#3cb878', 'text' : 'OPPONENT CHOISE' , 'textFontSize' : 9},
                {'fillStyle' : '#000000', 'text' : 'BANKRUPT', 'textFontSize' : 16, 'textFillStyle' : '#ffffff'},
                {'fillStyle' : '#fff200', 'text' : 'PLAYER CHOISE' , 'textFontSize' : 10},
@@ -113,10 +138,14 @@ let wheelitems = [
     isSpined = false
     $("#select-set").show()
     $("#game-board").show()
+
+    inittable()
   }
 
 
-
+function inittable(){
+  
+}
 
 
      $("#select-set").hide()
@@ -189,6 +218,19 @@ function startSpin()
      // Begin the spin animation by calling startAnimation on the wheel object.
         theWheel.startAnimation();
       }
+}
+
+
+function calSize(name){
+  if(name.length < 8){
+    return 12
+  }else if (name.length >= 8 && name.length <=10){
+    return 11
+  }else if (name.length >= 10 && name.length <=13){
+    return 10
+  }else if (name.length >13){
+    return 8
+  }
 }
 
 // -------------------------------------------------------
@@ -363,11 +405,11 @@ $('#jeopardy tr td').click(function(){
   // 2.only allow to select one specific category from the wheel
   if($(document.getElementById(qid))[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
     isSelected = true
-
-    $('#answer-display').html("")
-    $('#question-display').html(qadata.display[0][qid]["question"])
-    tmpAnswer = qadata.display[0][qid]["answer"]
     tmpScore = parseInt($(document.getElementById(qid))[0].innerText,10)
+    $('#answer-display').html("")
+    $('#question-display').html(test[qCategory].qa[tmpScore].question)
+    tmpAnswer = test[qCategory].qa[tmpScore].answer
+    
 
     $(document.getElementById(qid)).html("") //after click on table cell, remove it
     $('#show-answer').show()
