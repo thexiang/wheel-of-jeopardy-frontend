@@ -1,7 +1,7 @@
 const test = {
   "Geography" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "1q1" , answer: "1a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -11,7 +11,7 @@ const test = {
   ,
   "History" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "2q1" , answer: "2a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -20,7 +20,7 @@ const test = {
   },
   "Religion" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "3q1" , answer: "3a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -30,7 +30,7 @@ const test = {
   ,
   "Solar System" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "4q1" , answer: "4a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -39,7 +39,7 @@ const test = {
   },
   "Sports and Entertainment" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "5q1" , answer: "5a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -47,9 +47,9 @@ const test = {
     }
   }
   ,
-  "Science" : {
+  "Sciences" : {
     qa: {
-      200: {question: "q1" , answer: "a1", points : 200  ,answeredCount: 0},
+      200: {question: "6q1" , answer: "6a1", points : 200  ,answeredCount: 0},
       400: {question: "q2" , answer: "a2", points : 400  ,answeredCount: 0},
       600: {question: "q3" , answer: "a3", points : 600  ,answeredCount: 0},
       800: {question: "q4" , answer: "a4", points : 800  ,answeredCount: 0},
@@ -147,6 +147,41 @@ function inittable(){
   
 }
 
+function generateTableHead(table, data) {
+  //for(const [a,b] of Object.entries(data)){ console.log(b)}
+  let thead = table.createTHead();
+  let row = thead.insertRow();
+  for (let [a,b] of Object.entries(data)) {
+    let th = document.createElement("th");
+    let text = document.createTextNode(a);
+
+    th.appendChild(text);
+    row.appendChild(th);
+  }
+}
+
+function generateTable(table, data) {
+    let tmpPoints = 200
+    for (i = 0; i<=4; i++) {
+      let row = table.insertRow();
+      for (let [c,d] of  Object.entries(data)) {
+      //console.log(d[key])
+      let cell = row.insertCell();
+      console.log(tmpPoints.toString())
+      console.log(c)
+      let div = document.createElement("div")
+      div.innerHTML = d.qa[tmpPoints.toString()].points
+      div.setAttribute("id", c+ "-" +tmpPoints)
+      cell.appendChild(div);
+    }
+    tmpPoints += 200
+  }
+}
+
+let table = document.querySelector("#jeopardy");
+generateTableHead(table, test);
+
+generateTable(table, test)
 
      $("#select-set").hide()
      $("#game-board").hide()
@@ -397,7 +432,7 @@ $("#start-game").click(function(){
 
 
 //choose question
-$('#jeopardy tr td').click(function(){
+$('#jeopardy tr td div').click(function(){
     qid = $(this).attr('id');
     let qCategoryCol = qid.substring(0,qid.indexOf('-'))
 
