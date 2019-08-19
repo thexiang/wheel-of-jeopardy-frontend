@@ -1,137 +1,3 @@
-const test = {
-  "Geography" : {
-    qa: {
-      200: {question: "1q1" , answer: "1a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  }
-  ,
-  "History" : {
-    qa: {
-      200: {question: "2q1" , answer: "2a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  },
-  "Religion" : {
-    qa: {
-      200: {question: "3q1" , answer: "3a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  }
-  ,
-  "Solar System" : {
-    qa: {
-      200: {question: "4q1" , answer: "4a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  },
-  "Sports and Entertainment" : {
-    qa: {
-      200: {question: "5q1" , answer: "5a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  }
-  ,
-  "Sciences" : {
-    qa: {
-      200: {question: "6q1" , answer: "6a1", points : 200  },
-      400: {question: "q2" , answer: "a2", points : 400  },
-      600: {question: "q3" , answer: "a3", points : 600  },
-      800: {question: "q4" , answer: "a4", points : 800  },
-      1000: {question: "q5" , answer: "a5", points : 1000}
-    }
-    ,answeredCount: 0
-  }
-}
-
-
-const round2data =   
-{ "round2data" : {
-  qa: {
-    200: {question: "1q1" , answer: "1a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-}
-,
-"space" : {
-  qa: {
-    200: {question: "2q1" , answer: "2a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-},
-"test3" : {
-  qa: {
-    200: {question: "3q1" , answer: "3a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-}
-,
-"Solar test4" : {
-  qa: {
-    200: {question: "4q1" , answer: "4a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-},
-"Sports and Entertainment test6" : {
-  qa: {
-    200: {question: "5q1" , answer: "5a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-}
-,
-"Sciences" : {
-  qa: {
-    200: {question: "6q1" , answer: "6a1", points : 200  },
-    400: {question: "q2" , answer: "a2", points : 400  },
-    600: {question: "q3" , answer: "a3", points : 600  },
-    800: {question: "q4" , answer: "a4", points : 800  },
-    1000: {question: "q5" , answer: "a5", points : 1000}
-  }
-  ,answeredCount: 0
-}
-}
-
-
 //init variable
 let wheelitems
 let theWheel
@@ -144,6 +10,7 @@ let roundNum = 1
 let isSpined = true
 let isSelected = false
 let playerTurn = 1
+let totalAnswered = 0
 let qid
 let playerInfo ={
       round1:{
@@ -173,10 +40,14 @@ let tmpScore = 0
 let tmpAnswer
 
 
-
-//get data from api
+// //get data from api
   function webData(){
-    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas'
+    if(roundNum == 1){
+    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/1'
+    }
+    else if(roundNum == 2){
+    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/2'
+    }
     $.ajax({
         type: "GET",
         url: url,
@@ -187,7 +58,7 @@ let tmpAnswer
 
 //init data
   function output(data){
-    qadata = test
+    qadata = data
     isSpined = false
     $("#select-set").show()
     $("#game-board").show()
@@ -199,6 +70,7 @@ let tmpAnswer
 
 
 function initChoose(data){
+  $('#choose-category .radio').remove()
   for (let [a,b] of Object.entries(data)) {
 
     var label = $("<label>").attr('class', "radio").text(a);
@@ -256,6 +128,9 @@ $('#wrong-button').hide()
 $('#show-answer').hide()
 $('#use-token').hide()
 $('#not-use-token').hide()
+$('#player1-total').hide()
+$('#player2-total').hide()
+
 
 
 
@@ -336,7 +211,7 @@ function startSpin()
        qCategory = ''
 
        spins = spins + 1
-       $('#spin-num').html("<b>Spins #: " + spins + "</b>")
+       $('#spin-num').html("<b>Spins#: " + spins + "</b>")
      // Begin the spin animation by calling startAnimation on the wheel object.
         theWheel.startAnimation();
       }
@@ -360,17 +235,7 @@ function calSize(name){
 // -------------------------------------------------------
 function handleWheel(indicatedSegment)
 { 
-if(spins == 3 && roundNum ==1){
-  qadata = round2data
-  spins = 0
-  roundNum = 2
-  qCategories = []
- 
-  $("#jeopardy tbody").remove()
-  inittable(qadata)
-  initWheel(qadata)
-  initChoose(qadata)
-}
+
   //if it's one of Categories
    if(qCategories.includes(indicatedSegment.text)){
       qCategory = indicatedSegment.text
@@ -403,6 +268,7 @@ if(spins == 3 && roundNum ==1){
     } else {
         alert("You have won " + indicatedSegment.text);
     }
+  
 }
 
 
@@ -414,33 +280,39 @@ function colorColumn(col, color){
 }
 
 function playerChoise(){
+  display("#question-display", "")
   $('#answer-display').html("Choose a category for yourself")
   $("#choose-category").show()
 }
 
 function opponentChoise(){
+    display("#question-display", "")
     $('#answer-display').html("Please let your opponent choose a category for you")
     $("#choose-category").show()
 }
 
 function freeTurn(){
+  if(changeRound()){return}
   swithPlayerTurn('free')
 }
 
 function loseTurn(){
-  if(playerInfo["round1"]["player" + playerTurn].token!=0){
+  if(changeRound()){return}
+  if(playerInfo["round" + roundNum]["player" + playerTurn].token!=0){
       useToken()
     }
   else{swithPlayerTurn('lose')}
-
+  
 }
 
 function doubleScore(){
   swithPlayerTurn('*')
+  if(changeRound()){return}
 }
 
 function bankrupt(){
   swithPlayerTurn('zero')
+  if(changeRound()){return}
 }
 
 function swithPlayerTurn(operation){
@@ -467,7 +339,7 @@ function swithPlayerTurn(operation){
         break
       case 'free':
         playerInfo["round" + roundNum]["player" + playerTurn].token += 1
-        display("#player"+ playerTurn + "-token", "Player" + playerTurn + "Token# " + playerInfo["round1"]["player" + playerTurn].token)
+        display("#player"+ playerTurn + "-token", "Player" + playerTurn + "Token# " + playerInfo["round" + roundNum]["player" + playerTurn].token)
         break
     }
       displayPlayerScore()
@@ -498,6 +370,7 @@ function handleRightWrong(op){
       display('#answer-display',"Spin Wheel")
   }
 
+  if(changeRound()){return}
 }
 
 
@@ -537,7 +410,7 @@ $("#start-game").click(function(){
 $( "#jeopardy" ).on("click", "tr td div", function(){
     qid = $(this).attr('id');
     let qCategoryCol = qid.substring(0,qid.indexOf('-'))
-    console.log(qid)
+
   // 1.each question can be only clicked once
   // 2.only allow to select one specific category from the wheel
   if($(document.getElementById(qid))[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
@@ -552,7 +425,8 @@ $( "#jeopardy" ).on("click", "tr td div", function(){
     $('#show-answer').show()
 
     qadata[qCategory].answeredCount += 1
-    console.log(qadata[qCategory].answeredCount)
+    totalAnswered += 1
+
   }
 });
 
@@ -580,14 +454,10 @@ $('#show-answer').click(function(){
     })
 
 
-$(".dropdown-menu li a").click(function(){
-  $(".dropdown-menu li a").parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-  $(".dropdown-menu li a").parents(".dropdown").find('.btn').val($(this).data('value'));
-});
+
 
 
 $('#use-token').click(function(){
-
   $('#use-token').hide()
   $('#not-use-token').hide()
   playerInfo["round" + roundNum]["player" + playerTurn].token -= 1
@@ -609,3 +479,40 @@ $('#not-use-token').click(function(){
   $('#not-use-token').hide()
   swithPlayerTurn('lose')}
 )
+
+
+function changeRound(){
+  if((spins == 10 && roundNum ==1) || totalAnswered >=30){
+    spins = 0
+    roundNum = 2
+    qCategories = []
+    isSpined = true
+    $("#jeopardy tbody").remove()
+    webData()
+
+    $('#spin-num').html("<b>Spins#: " + spins + "</b>")
+    $('#round-num').html("<b>Round#:" +roundNum +"</b>")
+    alert("Round2 Started")
+    totalAnswered = 0
+    return true
+  }
+
+  if((spins == 10 && roundNum ==2) || totalAnswered >=30){
+    isSpined = true
+    $("#spin_button").attr("src","img/spin_off.png");
+    const player1Total = playerInfo.round1.player1.score + playerInfo.round2.player1.score
+    const player2Total = playerInfo.round1.player2.score + playerInfo.round2.player2.score
+    display("#question-display", "Game Over!")
+    display("#player1-total", "Player1 Total Score: " + player1Total )
+    display("#player2-total", "Player2 Total Score: " + player2Total )
+    if(player1Total > player2Total){
+    display("#answer-display", "Winner is Player1!")
+    }
+    else if(player1Total < player2Total){
+      display("#answer-display", "Winner is Player2!")
+    }else {display("#answer-display", "Even Game!")}
+    return true
+  }
+
+  return false
+}
