@@ -1,4 +1,5 @@
 const baseUrl = 'https://jhu-se-api-container.azurewebsites.net'
+// baseUrl = 'http://localhost:81'
 var selectedRow = null
 var selectedId = null
 initRecord()
@@ -59,6 +60,8 @@ function popTable(res){
         cell1 = newRow.insertCell(0);
         cell1.innerHTML = row.name;
         cell2 = newRow.insertCell(1);
+        cell2.innerHTML = row.round;
+        cell2 = newRow.insertCell(2);
         cell2.innerHTML = ` <a class='glyphicon glyphicon-edit' id="${row.id}"  onClick="onEdit(this)">Rename</a>
                            <a class='glyphicon glyphicon-question-sign' id="${row.id}" onClick="onDetail(this)">Questions</a>`;
     })
@@ -155,7 +158,7 @@ function popTable_qa(res){
         cell2 = newRow.insertCell(1);
         cell2.innerHTML = row.answer;
         cell3 = newRow.insertCell(2);
-        cell3.innerHTML = row.score;
+        cell3.innerHTML = row.points;
         cell4 = newRow.insertCell(3);
         cell4.innerHTML = `<a id="${row.id}" onClick="onEdit_qa(this)">Edit</a>`;
     })
