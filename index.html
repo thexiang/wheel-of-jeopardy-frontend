@@ -35,7 +35,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">Wheel1 of Jeopardy</a>
+        <a class="navbar-brand" href="index.html">Wheel of Jeopardy</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.html">Game</a></li>
@@ -47,7 +47,7 @@
   </nav>
 
 
-  <button type="button" class="btn btn-success" id='start-game'>Strat Game</button>
+  <button type="button" class="btn btn-success" id='start-game'>Start Game</button>
 
 
 <div class="container-fluid" id="game-board">
@@ -60,10 +60,10 @@
   </div>
 
   <div class="row" id="score-bar">
-    <div class="col-sm-3" id="p1r1">Player1 Round1 Score: 0</div>
-    <div class="col-sm-3" id="p2r1">Player2 Round1 Score: 0</div>
-    <div class="col-sm-3" id="p1r2">Player1 Round2 Score: 0</div>
-    <div class="col-sm-3" id="p2r2">Player2 Round2 Score: 0</div>
+    <div class="col-sm-3" id="p1r1">Player1Round1 Score: 0</div>
+    <div class="col-sm-3" id="p2r1">Player2Round1 Score: 0</div>
+    <div class="col-sm-3" id="p1r2">Player1Round2 Score: 0</div>
+    <div class="col-sm-3" id="p2r2">Player2Round2 Score: 0</div>
   </div>
 </div>
 
@@ -93,17 +93,9 @@
           </table>
 
   <div id="player-turn">Player1's turn</div>
+  <div id="countdown"></div>
               <div class="jumbotron">
-                <form id = "choose-category">
-                  <!-- <label class="radio"><input type="radio" name="optradio" value="Geography">Geography</label>
-                  <label class="radio"><input type="radio" name="optradio" value="History">History</label>
-                  <label class="radio"><input type="radio" name="optradio" value="Religion">Religion</label>
-                  <label class="radio"><input type="radio" name="optradio" value="Solar System">Solar System</label>
-                  <label class="radio"><input type="radio" name="optradio" value="Sports and Entertainment">Sports and Entertainment</label>
-                  <label class="radio"><input type="radio" name="optradio" value="Science">Science</label> -->
-                    
-
-              </form>
+                <form id = "choose-category"></form>
                 <h4 id = 'question-display'>Player1's turn</h4>
                 <h4 id = 'player1-total'></h4>
                 <h4 id = 'player2-total'></h4>

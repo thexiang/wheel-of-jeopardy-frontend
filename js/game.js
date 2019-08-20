@@ -72,11 +72,8 @@ let tmpAnswer
 function initChoose(data){
   $('#choose-category .radio').remove()
   for (let [a,b] of Object.entries(data)) {
-
-    var label = $("<label>").attr('class', "radio").text(a);
-    var input = $('<input type="radio" >').attr({name: 'optradio', value: a});
-    input.appendTo(label);
-    $('#choose-category').append(label);
+   
+    $('#choose-category').append('<label class="radio"><input type="radio" name="optradio" value="History">' + a + '</label>');
 
   }
 }
@@ -414,6 +411,7 @@ $( "#jeopardy" ).on("click", "tr td div", function(){
   // 1.each question can be only clicked once
   // 2.only allow to select one specific category from the wheel
   if($(document.getElementById(qid))[0].innerText != '' && qCategoryCol === qCategory && !isSelected){
+    countdown()
     isSelected = true
     tmpScore = parseInt($(document.getElementById(qid))[0].innerText,10)
     $('#answer-display').html("")
@@ -426,7 +424,7 @@ $( "#jeopardy" ).on("click", "tr td div", function(){
 
     qadata[qCategory].answeredCount += 1
     totalAnswered += 1
-
+  
   }
 });
 
@@ -440,6 +438,7 @@ $( "#choose-category" ).on('change', "input", function() {
    isSelected = false
    $(this).prop('checked', false);
    $("#choose-category").hide()
+   $('#answer-display').html("Choose a question")
 });
 
 $('#right-button').click(function(){handleRightWrong('+')})
@@ -448,6 +447,7 @@ $('#wrong-button').click(function(){handleRightWrong('-')})
 //after click show answer button, display answer
 $('#show-answer').click(function(){
       $('#answer-display').html(tmpAnswer)
+      $("#countdown").hide()
       $('#show-answer').hide()
       $('#right-button').show()
       $('#wrong-button').show()
@@ -515,4 +515,18 @@ function changeRound(){
   }
 
   return false
+}
+
+function countdown(){
+  let timeleft = 10;
+  $("#countdown").show()
+  $("#countdown").html(timeleft + " seconds remaining");
+  let downloadTimer = setInterval(function(){
+    $("#countdown").html(timeleft + " seconds remaining");
+    timeleft -= 1;
+    if(timeleft <= 0){
+      clearInterval(downloadTimer);
+      document.getElementById("countdown").innerHTML = "Finished"
+    }
+  }, 1000);
 }
