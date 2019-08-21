@@ -73,7 +73,7 @@ function initChoose(data){
   $('#choose-category .radio').remove()
   for (let [a,b] of Object.entries(data)) {
    
-    $('#choose-category').append('<label class="radio"><input type="radio" name="optradio" value="History">' + a + '</label>');
+    $('#choose-category').append('<label class="radio"><input type="radio" name="optradio" value="' + a + '">' + a + '</label>');
 
   }
 }
@@ -482,7 +482,7 @@ $('#not-use-token').click(function(){
 
 
 function changeRound(){
-  if((spins == 10 && roundNum ==1) || totalAnswered >=30){
+  if((spins == 2 && roundNum ==1) || totalAnswered >=30){
     spins = 0
     roundNum = 2
     qCategories = []
@@ -494,6 +494,7 @@ function changeRound(){
     $('#round-num').html("<b>Round#:" +roundNum +"</b>")
     alert("Round2 Started")
     totalAnswered = 0
+    $("#spin_button").attr("src","img/spin_on.png");
     return true
   }
 
