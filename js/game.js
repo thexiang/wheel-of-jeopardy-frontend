@@ -482,7 +482,7 @@ $('#not-use-token').click(function(){
 
 
 function changeRound(){
-  if((spins == 2 && roundNum ==1) || totalAnswered >=30){
+  if((spins == 10 && roundNum ==1) || totalAnswered >=30){
     spins = 0
     roundNum = 2
     qCategories = []
