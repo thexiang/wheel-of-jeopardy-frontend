@@ -1,2 +1,1 @@
-To run locally:
-python3 -m http.server 8000
+Now this is a Static Site
