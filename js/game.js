@@ -1,3 +1,136 @@
+const test = {
+  "Geography" : {
+    qa: {
+      200: {question: "1q1" , answer: "1a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  }
+  ,
+  "History" : {
+    qa: {
+      200: {question: "2q1" , answer: "2a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  },
+  "Religion" : {
+    qa: {
+      200: {question: "3q1" , answer: "3a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  }
+  ,
+  "Solar System" : {
+    qa: {
+      200: {question: "4q1" , answer: "4a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  },
+  "Sports and Entertainment" : {
+    qa: {
+      200: {question: "5q1" , answer: "5a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  }
+  ,
+  "Sciences" : {
+    qa: {
+      200: {question: "6q1" , answer: "6a1", points : 200  },
+      400: {question: "q2" , answer: "a2", points : 400  },
+      600: {question: "q3" , answer: "a3", points : 600  },
+      800: {question: "q4" , answer: "a4", points : 800  },
+      1000: {question: "q5" , answer: "a5", points : 1000}
+    }
+    ,answeredCount: 0
+  }
+}
+
+
+const round2data =   
+{ "round2data" : {
+  qa: {
+    200: {question: "1q1" , answer: "1a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+}
+,
+"space" : {
+  qa: {
+    200: {question: "2q1" , answer: "2a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+},
+"test3" : {
+  qa: {
+    200: {question: "3q1" , answer: "3a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+}
+,
+"Solar test4" : {
+  qa: {
+    200: {question: "4q1" , answer: "4a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+},
+"Sports and Entertainment test6" : {
+  qa: {
+    200: {question: "5q1" , answer: "5a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+}
+,
+"Sciences" : {
+  qa: {
+    200: {question: "6q1" , answer: "6a1", points : 200  },
+    400: {question: "q2" , answer: "a2", points : 400  },
+    600: {question: "q3" , answer: "a3", points : 600  },
+    800: {question: "q4" , answer: "a4", points : 800  },
+    1000: {question: "q5" , answer: "a5", points : 1000}
+  }
+  ,answeredCount: 0
+}
+}
+
 //init variable
 let wheelitems
 let theWheel
@@ -40,24 +173,34 @@ let tmpScore = 0
 let tmpAnswer
 
 
-// //get data from api
-  function webData(){
+// // //get data from api
+//   function webData(){
+//     if(roundNum == 1){
+//     var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/1'
+//     }
+//     else if(roundNum == 2){
+//     var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/2'
+//     }
+//     $.ajax({
+//         type: "GET",
+//         url: url,
+//         success: output,
+//         dataType: 'json'
+//       });
+//   }
+
+function webData(){
     if(roundNum == 1){
-    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/1'
+      output(test)
     }
     else if(roundNum == 2){
-    var url = 'https://jhu-se-api-container.azurewebsites.net/get_qas/round/2'
+      output(test)
     }
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: output,
-        dataType: 'json'
-      });
-  }
+}
 
 //init data
   function output(data){
+  
     qadata = data
     isSpined = false
     $("#select-set").show()
